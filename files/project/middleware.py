@@ -13,3 +13,9 @@ class OptionalRemoteUserMiddleware(RemoteUserMiddleware):
                 request.META[self.header] = request.user.get_username()
 
         super(OptionalRemoteUserMiddleware, self).process_request(request)
+
+class InterceptionRemoteUserMiddleware(object):
+    def process_request(self, request):
+        if hasattr(request, 'user') and request.user.is_authenticated():
+            # request.META["REQUEST_METHOD"] = "GET"
+            request.method = "GET"
