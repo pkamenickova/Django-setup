@@ -15,3 +15,12 @@ class MyRemoteUserBackend(RemoteUserBackend):
         user.is_superuser = True
         user.save()
         return user
+
+    def authenticate(self, remote_user, attributes=None):
+        user = super(MyRemoteUserBackend, self).authenticate(remote_user = remote_user)
+        if attributes and len(attributes):
+                user.first_name = attributes.get("firstname")
+                user.last_name = attributes.get("lastname")
+                user.email = attributes.get("email")
+                user.save()
+        return user

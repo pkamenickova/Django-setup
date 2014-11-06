@@ -1,0 +1,6 @@
+2d1
+< LoadModule authnz_pam_module modules/mod_authnz_pam.so
+29c28
+<   Require pam-account djangoapp
+---
+>   Require valid-user
